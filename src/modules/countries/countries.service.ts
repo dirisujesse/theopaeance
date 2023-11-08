@@ -4,7 +4,7 @@ import { UpdateCountryDto } from './dto/update-country.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Country } from './entities/country.entity';
 import { Model } from 'mongoose';
-import { PageData, PostResponse } from 'src/entities/response.entity';
+import { PageData, PostResponse } from 'src/components/schemas/response.schema';
 
 @Injectable()
 export class CountriesService {

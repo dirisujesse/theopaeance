@@ -17,7 +17,7 @@ import {
   AppPaginatedResponse,
   AppResponse,
   PostResponse,
-} from 'src/entities/response.entity';
+} from 'src/components/schemas/response.schema';
 import { Country } from './entities/country.entity';
 import { ApiTags } from '@nestjs/swagger';
 

@@ -5,6 +5,7 @@ import { DocumentBuilder, SwaggerDocumentOptions, SwaggerModule } from '@nestjs/
 import { CountriesModule } from './modules/countries/countries.module';
 import { GenreModule } from './modules/genre/genre.module';
 import { LanguagesModule } from './modules/languages/languages.module';
+import { AppPaginatedResponse, AppResponse } from './components/schemas/response.schema';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -32,8 +33,8 @@ async function bootstrap() {
       CountriesModule,
       GenreModule,
       LanguagesModule,
+      AppModule,
     ],
-    deepScanRoutes: true,
   }
   const document = SwaggerModule.createDocument(app, config, options);
   SwaggerModule.setup('api', app, document);
