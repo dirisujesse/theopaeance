@@ -17,9 +17,9 @@ import {
   AppPaginatedResponse,
   AppResponse,
   PostResponse,
-} from 'src/entities/response.entity';
+} from 'src/components/schemas/response.schema';
 import { Language } from './entities/language.entity';
-import { ApiBody, ApiCreatedResponse, ApiOkResponse, ApiTags, getSchemaPath } from '@nestjs/swagger';
+import { ApiBody, ApiCreatedResponse, ApiExtraModels, ApiOkResponse, ApiTags, getSchemaPath } from '@nestjs/swagger';
 import { PartialType } from '@nestjs/mapped-types';
 
 @Controller('languages')
@@ -78,7 +78,7 @@ export class LanguagesController {
   }
 
   @Get('search')
-  // @ApiOkResponse({ type: AppPaginatedResponse<Language> })
+  @ApiOkResponse({  })
   async search(
     @Query('q') q: string,
     @Query('page', new DefaultValuePipe(1)) page: number,
@@ -111,6 +111,7 @@ export class LanguagesController {
   
   @Patch(':id')
   // @ApiOkResponse({ type: AppResponse<Language> })
+  // @ApiExtraModels(Language)
   async update(
     @Param('id') id: string,
     @Body() updateLanguageDto: UpdateLanguageDto,

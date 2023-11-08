@@ -4,9 +4,9 @@ import { CountriesController } from './countries.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Country, CountrySchema } from './entities/country.entity';
 
-import { ControllerMethodProvider } from '../../factory/controller-method.factory';
-import { PaginatedMethodProvider } from 'src/factory/paginated-method.factory';
-import { IdMethodProvider } from 'src/factory/id-method.factory';
+import { ControllerMethodProvider } from '../../components/factory/controller-method.factory';
+import { PaginatedMethodProvider } from 'src/components/factory/paginated-method.factory';
+import { IdMethodProvider } from 'src/components/factory/id-method.factory';
 
 @Module({
   imports: [
