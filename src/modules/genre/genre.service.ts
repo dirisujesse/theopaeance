@@ -4,7 +4,7 @@ import { UpdateGenreDto } from './dto/update-genre.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Genre } from './entities/genre.entity';
 import { Model } from 'mongoose';
-import { PostResponse } from 'src/entities/response.entity';
+import { PostResponse } from 'src/components/schemas/response.schema';
 
 @Injectable()
 export class GenreService {

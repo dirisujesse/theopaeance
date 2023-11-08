@@ -3,8 +3,8 @@ import { GenreService } from './genre.service';
 import { GenreController } from './genre.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Genre, GenreSchema } from './entities/genre.entity';
-import { ControllerMethodProvider } from 'src/factory/controller-method.factory';
-import { IdMethodProvider } from 'src/factory/id-method.factory';
+import { ControllerMethodProvider } from 'src/components/factory/controller-method.factory';
+import { IdMethodProvider } from 'src/components/factory/id-method.factory';
 
 @Module({
   imports: [

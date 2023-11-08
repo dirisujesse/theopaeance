@@ -4,7 +4,7 @@ import { UpdateLanguageDto } from './dto/update-language.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Language } from './entities/language.entity';
 import { Model } from 'mongoose';
-import { PageData, PostResponse } from 'src/entities/response.entity';
+import { PageData, PostResponse } from 'src/components/schemas/response.schema';
 
 @Injectable()
 export class LanguagesService {

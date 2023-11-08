@@ -12,7 +12,7 @@ import {
 import { GenreService } from './genre.service';
 import { CreateGenreDto } from './dto/create-genre.dto';
 import { UpdateGenreDto } from './dto/update-genre.dto';
-import { AppResponse, PostResponse } from 'src/entities/response.entity';
+import { AppResponse, PostResponse } from 'src/components/schemas/response.schema';
 import { Genre } from './entities/genre.entity';
 import { ApiTags } from '@nestjs/swagger';
 
