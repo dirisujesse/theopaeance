@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ComposerService } from './composer.service';
 import { CreateComposerDto } from './dto/create-composer.dto';
 import { UpdateComposerDto } from './dto/update-composer.dto';
@@ -23,7 +31,10 @@ export class ComposerController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateComposerDto: UpdateComposerDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateComposerDto: UpdateComposerDto,
+  ) {
     return this.composerService.update(+id, updateComposerDto);
   }
 

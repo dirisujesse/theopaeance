@@ -7,6 +7,8 @@ import {
   Param,
   Delete,
   Query,
+  Inject,
+  DefaultValuePipe,
 } from '@nestjs/common';
 import { CountriesService } from './countries.service';
 import { CreateCountryDto } from './dto/create-country.dto';
@@ -17,75 +19,74 @@ import {
   PostResponse,
 } from 'src/entities/response.entity';
 import { Country } from './entities/country.entity';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('countries')
+@ApiTags("Countries")
 export class CountriesController {
-  constructor(private readonly countriesService: CountriesService) {}
+  constructor(
+    private readonly countriesService: CountriesService,
+    @Inject('CONTROLLER_METHOD_WRAPPER')
+    private readonly methodWrapper,
+  ) {}
 
   @Post()
   async create(
     @Body() createCountryDto: CreateCountryDto,
   ): Promise<AppResponse<PostResponse>> {
-    try {
+    return await this.methodWrapper(async () => {
       const response = await this.countriesService.create(createCountryDto);
       return {
         data: response,
-        statusCode: 201,
       };
-    } catch (e) {
-      return {
-        statusCode: 500,
-        error: {
-          message: `${e.message ?? e}`,
-        },
-      };
-    }
+    });
   }
 
   @Get()
   async findAll(
-    @Query('page') page: number = 1,
-    @Query('limit') limit: number = 20,
+    @Query('page', new DefaultValuePipe(1)) page: number,
+    @Query('limit', new DefaultValuePipe(20)) limit: number,
   ): Promise<AppPaginatedResponse<Country>> {
-    try {
+    return await this.methodWrapper(async () => {
       const response = await this.countriesService.findAll(page, limit);
       return {
         data: response.data,
-        page: response.page,
         pages: response.pages,
         previous: response.previous,
+        page: response.page,
         next: response.next,
-        statusCode: 200,
+        count: response.count,
       };
-    } catch (e) {
+    });
+  }
+
+  @Get('search')
+  async search(
+    @Query('q') q: string,
+    @Query('page', new DefaultValuePipe(1)) page: number,
+    @Query('limit', new DefaultValuePipe(20)) limit: number,
+  ): Promise<AppPaginatedResponse<Country>> {
+    return this.methodWrapper(async () => {
+      const response = await this.countriesService.search(q, page, limit);
       return {
-        statusCode: 500,
-        error: {
-          message: `${e.message ?? e}`,
-        },
-        page: page,
-        pages: 0,
-        data: [],
+        data: response.data,
+        pages: response.pages,
+        previous: response.previous,
+        page: response.page,
+        next: response.next,
+        count: response.count,
       };
-    }
+    });
   }
 
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<AppResponse<Country>> {
-    try {
+    return await this.methodWrapper(async () => {
       const response = await this.countriesService.findOne(id);
       return {
         data: response,
-        statusCode: 200,
       };
-    } catch (e) {
-      return {
-        statusCode: 500,
-        error: {
-          message: `${e.message ?? e}`,
-        },
-      };
-    }
+    });
   }
 
   @Patch(':id')
@@ -93,37 +94,21 @@ export class CountriesController {
     @Param('id') id: string,
     @Body() updateCountryDto: UpdateCountryDto,
   ): Promise<AppResponse<Country>> {
-    try {
+    return await this.methodWrapper(async () => {
       const response = await this.countriesService.update(id, updateCountryDto);
       return {
         data: response,
-        statusCode: 201,
       };
-    } catch (e) {
-      return {
-        statusCode: 500,
-        error: {
-          message: `${e.message ?? e}`,
-        },
-      };
-    }
+    });
   }
 
   @Delete(':id')
   async remove(@Param('id') id: string): Promise<AppResponse<PostResponse>> {
-    try {
+    return await this.methodWrapper(async () => {
       const response = await this.countriesService.remove(id);
       return {
         data: response,
-        statusCode: 204,
       };
-    } catch (e) {
-      return {
-        statusCode: 500,
-        error: {
-          message: `${e.message ?? e}`,
-        },
-      };
-    }
+    });
   }
 }

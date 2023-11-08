@@ -3,13 +3,13 @@ import { HydratedDocument } from 'mongoose';
 
 @Schema({ collection: 'Country' })
 export class Country {
-  @Prop()
+  @Prop({ unique: true })
   code: string;
 
   @Prop()
   emoji: string;
-  
-  @Prop()
+
+  @Prop({ unique: true })
   name: string;
 
   @Prop()

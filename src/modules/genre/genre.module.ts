@@ -3,6 +3,8 @@ import { GenreService } from './genre.service';
 import { GenreController } from './genre.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Genre, GenreSchema } from './entities/genre.entity';
+import { ControllerMethodProvider } from 'src/factory/controller-method.factory';
+import { IdMethodProvider } from 'src/factory/id-method.factory';
 
 @Module({
   imports: [
@@ -14,6 +16,6 @@ import { Genre, GenreSchema } from './entities/genre.entity';
     ]),
   ],
   controllers: [GenreController],
-  providers: [GenreService],
+  providers: [GenreService, ControllerMethodProvider, IdMethodProvider],
 })
 export class GenreModule {}

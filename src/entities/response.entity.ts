@@ -1,52 +1,62 @@
-interface ErrorResponse {
-  message: string;
-  errorCode?: number;
-  title?: string;
-}
+import { Type } from "@nestjs/common";
+import { ApiHideProperty, getSchemaPath } from "@nestjs/swagger";
 
-export interface PostResponse {
+export class PostResponse {
   message: string;
 }
 
-export interface PageData<T> {
+export class PageData<T> {
   page: number;
   pages: number;
+  count: number;
   previous?: number;
   next?: number;
   data: T[];
 }
 
 export class AppResponse<T> {
-  error?: ErrorResponse;
+  // @ApiHideProperty()
   data?: T;
-  statusCode: number;
 
-  constructor(statusCode: number, error?: ErrorResponse, data?: T) {
+  constructor(data?: T) {
     this.data = data;
-    this.error = error;
-    this.statusCode = statusCode;
   }
 }
 
 export class AppPaginatedResponse<T> extends AppResponse<T[]> {
   page: number;
   pages: number;
+  count: number;
   previous?: number;
   next?: number;
 
   constructor(
     page: number,
     pages: number,
-    statusCode: number,
     previous?: number,
     next?: number,
-    error?: ErrorResponse,
     data?: T[],
   ) {
-    super(statusCode, error, data);
+    super(data);
     this.page = page;
     this.pages = pages;
     this.previous = previous;
     this.next = next;
   }
 }
+
+// export function getSchema<T, K>(base: Type) {
+//   return {
+//     allOf: [
+//       { $ref: getSchemaPath(base) },
+//       {
+//         properties: {
+//           results: {
+//             type: 'array',
+//             items: { $ref: getSchemaPath(CatDto) },
+//           },
+//         },
+//       },
+//     ],
+//   };
+// }

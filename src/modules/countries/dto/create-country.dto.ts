@@ -1,19 +1,19 @@
-import {
-  IsString,
-  IsNotEmpty
-} from 'class-validator';
+import { IsString, IsNotEmpty } from 'class-validator';
 
 export class CreateCountryDto {
-  @IsNotEmpty()
+  @IsString({ message: 'code should be a string' })
+  @IsNotEmpty({ message: 'code should not be empty' })
   code: string;
 
-  @IsNotEmpty()
+  @IsString({ message: 'emoji should be a string' })
+  @IsNotEmpty({ message: 'emoji should not be empty' })
   emoji: string;
 
-  @IsString()
-  @IsNotEmpty()
+  @IsString({ message: 'name should be a string' })
+  @IsNotEmpty({ message: 'name should not be empty' })
   name: string;
 
-  @IsNotEmpty()
+  @IsString({ message: 'dial_code should be a string' })
+  @IsNotEmpty({ message: 'dial_code should not be empty' })
   dial_code: string;
 }

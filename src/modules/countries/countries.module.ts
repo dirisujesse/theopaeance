@@ -4,6 +4,10 @@ import { CountriesController } from './countries.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Country, CountrySchema } from './entities/country.entity';
 
+import { ControllerMethodProvider } from '../../factory/controller-method.factory';
+import { PaginatedMethodProvider } from 'src/factory/paginated-method.factory';
+import { IdMethodProvider } from 'src/factory/id-method.factory';
+
 @Module({
   imports: [
     MongooseModule.forFeature([
@@ -14,6 +18,11 @@ import { Country, CountrySchema } from './entities/country.entity';
     ]),
   ],
   controllers: [CountriesController],
-  providers: [CountriesService],
+  providers: [
+    CountriesService,
+    ControllerMethodProvider,
+    PaginatedMethodProvider,
+    IdMethodProvider,
+  ],
 })
 export class CountriesModule {}

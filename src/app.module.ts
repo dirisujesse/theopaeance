@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CommentModule } from './modules/comment/comment.module';
 import { UserModule } from './modules/user/user.module';
@@ -34,7 +32,6 @@ const env = process.env;
     LanguagesModule,
     GenreModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  exports: [],
 })
 export class AppModule {}

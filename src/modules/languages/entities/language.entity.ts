@@ -3,10 +3,10 @@ import { HydratedDocument } from 'mongoose';
 
 @Schema({ collection: 'Language' })
 export class Language {
-  @Prop()
+  @Prop({ unique: true, length: 3, lowercase: true })
   code: string;
 
-  @Prop()
+  @Prop({ unique: true })
   name: string;
 }
 
